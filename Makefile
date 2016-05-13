@@ -6,7 +6,7 @@
 #    By: dboudy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/19 11:43:50 by dboudy            #+#    #+#              #
-#    Updated: 2016/05/11 16:37:26 by dboudy           ###   ########.fr        #
+#    Updated: 2016/05/12 16:42:48 by dboudy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,8 @@ HEADERNAME = $(NAME).h color_key_mask.h
 SRCDIR = ./src/
 SRCNAME = main.c \
 		  raytracer.c \
+		  smash_up.c \
 		  vector3d.c \
-		  cercle.c \
-		  test.c \
 		  loop.c \
 		  tools.c
 

@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 13:33:26 by dboudy            #+#    #+#             */
-/*   Updated: 2016/04/26 11:05:24 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/12 16:15:33 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	color_one_pixel_secure(int color, t_image *img, int x, int y)
 	if (x >= 0 && x < img->size_line && y >= 0 && y < (img->last_pixel / img->size_line))
 		tmp[pixel] = color;
 }
-
+/*
 static int		check_same_color(t_image *img, int x, int y, int color)
 {
 	int *tmp;
@@ -52,7 +52,7 @@ static int		check_same_color(t_image *img, int x, int y, int color)
 	}
 	return (0);
 }
-/*
+
 int		degrade(int color)
 {
 	static int rappel = -1;
@@ -91,7 +91,6 @@ void	fill_degrade_shape(t_image *img, int x, int y, int color_stop, int color_pu
 	if (!check_same_color(img, x, y - 1, color_stop))
 		fill_degrade_shape(img, x, y - 1, color_stop, color_put);
 }
-*/
 void	fill_shape(t_image *img, int x, int y, int color)
 {
 	if (check_same_color(img, x, y, color))
@@ -105,3 +104,4 @@ void	fill_shape(t_image *img, int x, int y, int color)
 	if (check_same_color(img, x, y - 1, color))
 		fill_shape(img, x, y - 1, color);
 }
+*/
