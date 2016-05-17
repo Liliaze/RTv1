@@ -14,13 +14,13 @@
 #include "libft.h"
 #include "mlx.h"
 
-inline static void	init_window_and_img(t_win *win, t_image *img, char *title)
+inline static void	init_window_and_img(t_win *win, t_img *img, char *title)
 {
-	win->title_win = ft_strdup(title);
-	win->wwidth = WINW;
-	win->wheight = WINH;
-	img->iwidth = WINW;
-	img->iheight = WINH;
+	win->title = ft_strdup(title);
+	win->width = WINW;
+	win->height = WINH;
+	img->width = WINW;
+	img->height = WINH;
 	if ((win->mlx = mlx_init()) == NULL)
 		ft_display_error("mlx_init() does not function");
 	if ((win->win = mlx_new_window(win->mlx, win->wwidth, win->wheight,
@@ -39,11 +39,11 @@ inline static void	init_window_and_img(t_win *win, t_image *img, char *title)
 inline static void	init_struct(t_all *all)
 {
 	all->awin = (t_win *)ft_memalloc(sizeof(t_win));
-	all->aimage = (t_image *)ft_memalloc(sizeof(t_image));
+	all->aimage = (t_img *)ft_memalloc(sizeof(t_img));
 	all->acam = (t_cam *)ft_memalloc(sizeof(t_cam));
 	all->aray = (t_ray *)ft_memalloc(sizeof(t_ray));
-	all->apixel = (t_pixel *)ft_memalloc(sizeof(t_pixel));
-	all->aobj = (t_obj *)ft_memalloc(sizeof(t_obj));
+	all->av3d = (t_v3d *)ft_memalloc(sizeof(t_v3d));
+	all->aobj = NULL;;
 }
 
 int	main(int ac, char **av)
@@ -57,10 +57,9 @@ int	main(int ac, char **av)
 		all = (t_all *)ft_memalloc(sizeof(t_all));
 		init_struct(all);
 		init_window_and_img(all->awin, all->aimage, av[1]);
-		init_camera(all->aray, all->acam, all->awin); //emplacement test-tmp.
-		ray_tracing(all);
-		// lire et parser les infos de la scene ici.
+		init_scene(all->aobj, av[1]));// lire et parser les infos de la scene ici.
 		// initiliaser les eventuels variables d'en en csq.
+		ray_tracing(all);
 		ft_loop(all); /* appel de la boucle event */
 	}
 	return (0);

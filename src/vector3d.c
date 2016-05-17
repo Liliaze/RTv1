@@ -24,6 +24,27 @@ void	vector_normalize(t_vec3d *v)
 	v->z = v->z * tmp;
 }
 
+void	vector_sub(t_vec3d *a, t_vec3d *b)
+{
+	a->x -= b->x;
+	a->y -= b->y;
+	a->z -= b->z;
+}
+
+void	vector_mult(t_vec3d *a, t_vec3d *b)
+{
+	a->x *= b->x;
+	a->y *= b->y;
+	a->z *= b->z;
+}
+
+void	vector_translate(t_vec3d *a, t_vec3d *b, double coef)
+{
+	a->x += b->x * coef;
+	a->y += b->y * coef;
+	a->z += b->z * coef;
+}
+
 double		vector_dot(t_vec3d *a, t_vec3d *b)
 {
 	double	dot;
@@ -43,13 +64,3 @@ t_vec3d		*vector_copy(t_vec3d *v)
 	return (new);
 }
 	
-t_vec3d		*vector_sub(t_vec3d *a, t_vec3d *b)
-{
-	t_vec3d	*new;
-	
-	new = (t_vec3d *)ft_memalloc(sizeof(t_vec3d));
-	new->x = a->x - b->x;
-	new->y = a->y - b->y;
-	new->z = a->z - b->z;
-	return (new);
-}
