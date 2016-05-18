@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_atod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/19 11:04:04 by dboudy            #+#    #+#             */
-/*   Updated: 2016/04/19 15:57:20 by dboudy           ###   ########.fr       */
+/*   Created: 2016/05/18 10:03:28 by dboudy            #+#    #+#             */
+/*   Updated: 2016/05/18 10:50:12 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
 #include "libft.h"
 
-int		test(int b) // A SUP AVANT RENDU
+double		ft_atod(const char *str)
 {
-	int result;
+	double	result;
+	int		i;
 
-	result = b * 2;
+	i = 0;
+	result = (double)ft_atoi(str);
+	if (!str)
+		return (0);
+	while (str[i] != '.' && str[i] != '\0')
+				++i;
+	if (i && str[i])
+	{
+		if (result >= 0 && str[0] != '-')
+			result += ((double)ft_atoi(str + i + 1))
+				/ ((ft_strlen(str + i + 1) * 10));
+		else
+			result -= ((double)ft_atoi(str + i + 1))
+				/ ((ft_strlen(str + i + 1) * 10));
+	}
 	return (result);
 }

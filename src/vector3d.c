@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 16:08:47 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/12 17:40:51 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/18 18:06:36 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include <math.h>
 
-void	vector_normalize(t_vec3d *v)
+void	vector_normalize(t_v3d *v)
 {
 	double	tmp;
 	
@@ -24,28 +24,32 @@ void	vector_normalize(t_vec3d *v)
 	v->z = v->z * tmp;
 }
 
-void	vector_sub(t_vec3d *a, t_vec3d *b)
+t_v3d	*vector_sub(t_v3d *a, t_v3d *b)
 {
-	a->x -= b->x;
-	a->y -= b->y;
-	a->z -= b->z;
+	t_v3d	*tmp;
+	
+	tmp = (t_v3d *)ft_memalloc(sizeof(tmp));
+	tmp->x = a->x - b->x;
+	tmp->y = a->y - b->y;
+	tmp->z = a->z - b->z;
+	return (tmp);
 }
 
-void	vector_mult(t_vec3d *a, t_vec3d *b)
+void	vector_mult(t_v3d *a, t_v3d *b)
 {
 	a->x *= b->x;
 	a->y *= b->y;
 	a->z *= b->z;
 }
 
-void	vector_translate(t_vec3d *a, t_vec3d *b, double coef)
+void	vector_translate(t_v3d *a, t_v3d *b, double coef)
 {
 	a->x += b->x * coef;
 	a->y += b->y * coef;
 	a->z += b->z * coef;
 }
 
-double		vector_dot(t_vec3d *a, t_vec3d *b)
+double		vector_dot(t_v3d *a, t_v3d *b)
 {
 	double	dot;
 
@@ -53,11 +57,11 @@ double		vector_dot(t_vec3d *a, t_vec3d *b)
 	return (dot);
 }
 	
-t_vec3d		*vector_copy(t_vec3d *v)
+t_v3d		*vector_copy(t_v3d *v)
 {
-	t_vec3d	*new;
+	t_v3d	*new;
 
-	new = (t_vec3d *)ft_memalloc(sizeof(t_vec3d));
+	new = (t_v3d *)ft_memalloc(sizeof(t_v3d));
 	new->x = v->x;
 	new->y = v->y;
 	new->z = v->z;

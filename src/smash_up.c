@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 11:32:02 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/13 16:42:51 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/18 19:06:32 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,107 +14,60 @@
 #include <math.h>
 #include "libft.h"
 
-void	init_sphere(t_obj *sphere) // tmp
+int		smash_plan(t_obj *plan, t_ray *aray)
 {
-	t_obj	*new;
-	t_obj	*new2;
-	t_obj	*new3;
+	t_v3d	*v;
 
-	sphere->type = "sphere";
-	sphere->radius.x = 450;
-	sphere->pos.x = 50;
-	sphere->pos.y = 100;
-	sphere->pos.z = 5;
-	sphere->color = RED;
-	
-	new3 = (t_obj *)ft_memalloc(sizeof(t_obj));
-	new3->type = "sphere";
-	new3->radius.x = 450;
-	new3->pos.x = 150;
-	new3->pos.y = 150;
-	new3->pos.z = 5;
-	new3->color = YELLOW;
-	
-	new2 = (t_obj *)ft_memalloc(sizeof(t_obj));
-	new2->type = "sphere";
-	new2->radius.x = 450;
-	new2->pos.x = 200;
-	new2->pos.y = 150;
-	new2->pos.z = 5;
-	new2->color = GREEN;
-	
-	new = (t_obj *)ft_memalloc(sizeof(t_obj));
-	new->type = "plan";
-	new->size.x = 1;
-	new->size.y = 0;
-	new->size.z = 0;
-	new->pos.x = 0;
-	new->pos.y = WINW / 2;
-	new->pos.z = 1;
-	new->color = BLUE;
-	
-	new3->next = NULL;
-	new2->next = new3;
-	new->next = new2;
-	sphere->next = new;
-}
-
-int		smash(t_obj *obj, t_ray *aray, double *t)
-{
-	int	ret;
-
-	ret = 0;
-	if (!ft_strcmp(obj->type, "sphere"))
-		ret = smash_sphere(obj, aray, t);
-	else if (!ft_strcmp(obj->type, "plan"))
-		ret = smash_plan(obj, aray, t);
-	return (ret);
-}
-
-int		smash_plan(t_obj *plan, t_ray *aray, double *t)
-{
-	t_vec3d		*cpy;
-	double		tmp[3];
-
-	cpy = vector_copy(&plan->pos);
-	cpy = vector_sub(cpy, &aray->origin);
-	tmp[0] = vector_dot(cpy, &aray->origin);
-	tmp[1] = vector_dot(cpy, &aray->dir);
-	tmp[2] = -(tmp[0] / tmp[1]);
-	if (tmp[2] > -0.01 && tmp[2] < *t)
-	{
-		*t = tmp[2];
+	v = vector_sub(&(aray->origin), &(plan->origin));
+	aray->t = -(vector_dot(v, &(plan->dir))
+			/ vector_dot(&(plan->dir), &(aray->dir)));
+	free(v);
+	if (aray->t > 0)
 		return (1);
-	}
 	return (0);
 }
 
-int		smash_sphere(t_obj *sphere, t_ray *aray, double *t)
+int		smash_sphere(t_obj *sphere, t_ray *aray)
 {
-	int			ret;
-	double		tmp[3];
-	double		smash;
-	t_vec3d		*dist;
-	
-	ret = 0;
-	dist = vector_copy(&sphere->pos);
-	dist = vector_sub(dist, &aray->origin);
-	tmp[0] = vector_dot(&aray->dir, dist);
-	smash = (tmp[0] * tmp[0]) - vector_dot(dist, dist)
-		+ (sphere->radius.x * sphere->radius.x);
-	if (smash < 0.0)
-		return (ret);	
-	tmp[1] = tmp[0] - sqrt(smash);
-	tmp[2] = tmp[0] + sqrt(smash);
-	if (tmp[1] > 0.01 && tmp[1] < *t)
+	double	tmp[3];
+	double	res[3];
+	t_v3d	*v;
+
+	v = vector_sub(&(aray->origin), &(sphere->origin));
+	tmp[0] = vector_dot(&(aray->dir), &(aray->dir));
+	tmp[1] = 2 * (vector_dot(&(aray->dir), v));
+	tmp[2] = (vector_dot(v, v) - (sphere->size * sphere->size));
+	res[0] = tmp[1] * tmp[1] - 4 * tmp[0] * tmp[2];
+	if (res[0] >= 0.000)
 	{
-		*t = tmp[1];
-		ret = 1;
+		res[1] = (-tmp[1] + sqrt(res[0])) / (2 * tmp[0]);
+		res[2] = (-tmp[1] - sqrt(res[0])) / (2 * tmp[0]);
+		if (res[1] < res[2])
+			aray->t = res[1];
+		else
+			aray->t = res[2];
+		free(v);
+		return (1);
 	}
-	if (tmp[2] > 0.01 && tmp[2] < *t)
+	free(v);
+	return (0);
+}
+
+int		smash_check(t_all *all)
+{
+	t_obj	*tmp;
+
+	tmp = all->aobj;
+	while (tmp)
 	{
-		*t = tmp[2];
-		ret = 1;
+		tmp->smash(tmp, all->aray);
+		if (((all->dist > -1.0000 || all->dist < -1.0000) && all->aray->t > 0)
+				|| (0 < all->aray->t && all->aray->t < all->dist))
+		{
+			all->dist = all->aray->t;
+			all->color = tmp->color;
+		}
+		tmp = tmp->next;
 	}
-	return (ret);
+	return (1);
 }

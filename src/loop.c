@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 10:35:09 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/11 15:56:52 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/18 11:44:53 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	refresh_screen(t_all *all)
 {
 	mlx_clear_window(all->awin->mlx, all->awin->win);
 	mlx_put_image_to_window(all->awin->mlx, all->awin->win,
-			all->aimage->id, 0, 0);
+			all->aimg->id, 0, 0);
 	return (0);
 }
 
@@ -28,7 +28,7 @@ static int	key_press(int key, t_all *all)
 	if (key == ECHAP)
 		exit(0);
 	if (key == DEL)
-		color_all_pixel(BLACK, all->aimage->image, all->aimage->last_pixel);
+		color_all_pixel(BLACK, all->aimg->image, all->aimg->last_pixel);
 	if (key == UP)
 	{
 		ft_putstr("nothing to make on touch UP...\n");
