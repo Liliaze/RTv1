@@ -6,21 +6,23 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:31:14 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/19 16:16:57 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/19 18:17:38 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
-#define RTV1_H
+# define RTV1_H
 
-#include "color_key_mask.h"
-#include <stdio.h> // A SUP AVANT RENDU DEBUG
-#include <stdlib.h>
+# include "color_key_mask.h"
+# include <stdio.h> // A SUP AVANT RENDU DEBUG
+# include <stdlib.h>
 
-#define MAX_DIST	200000
-#define WINW		800
-#define WINH		600
-#define FOV		30
+//# define MAX_DIST	200000
+# define WINW		800
+# define WINH		600
+# define COEFW		(double)WINW / ((double)WINW * 100)
+# define COEFH		(double)WINH / ((double)WINH * 100)
+//# define FOV		30
 
 typedef struct	s_windows
 {
