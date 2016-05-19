@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:29:58 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/18 18:55:23 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/19 16:19:25 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ inline static void	init_struct(t_all *all)
 	all->aimg = (t_img *)ft_memalloc(sizeof(t_img));
 	all->acam = (t_cam *)ft_memalloc(sizeof(t_cam));
 	all->aray = (t_ray *)ft_memalloc(sizeof(t_ray));
-	all->av3d = (t_v3d *)ft_memalloc(sizeof(t_v3d));
 	all->aobj = (t_obj *)ft_memalloc(sizeof(t_obj));
 	all->acur = (t_obj *)ft_memalloc(sizeof(t_obj));
 }
@@ -59,9 +58,8 @@ int	main(int ac, char **av)
 		init_struct(all);
 		init_window_and_img(all->awin, all->aimg, av[1]);
 		init_scene(all->acam, all->aobj, &(all->nb_object), av[1]);// lire et parser les infos de la scene ici.
-		ray_tracing(all); // test rendu
-		ft_putstr("tampon");
-		ft_loop(all); /* appel de la boucle event */
+		ray_tracing(all);
+		ft_loop(all);
 	}
 	return (0);
 }

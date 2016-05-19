@@ -6,14 +6,14 @@
 #    By: dboudy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/19 11:43:50 by dboudy            #+#    #+#              #
-#    Updated: 2016/05/18 11:39:39 by dboudy           ###   ########.fr        #
+#    Updated: 2016/05/19 11:54:55 by dboudy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = rtv1
 GCC = gcc
 INCLIB = -I libft/includes
-CFLAGS = -O3 -Weverything -Wall -Wextra -Werror
+CFLAGS = -O3 -Wall -Wextra -Werror
 FLAGS2 = -lm -lmlx -framework OPENGL -framework AppKit
 HEADERDIR = ./include/
 HEADERNAME = $(NAME).h color_key_mask.h
