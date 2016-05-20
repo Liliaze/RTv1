@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 10:35:09 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/20 13:16:38 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/20 17:39:09 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static int	key_press(int key, t_all *all)
 		color_all_pixel(BLACK, all->aimg->image, all->aimg->last_pixel);
 	if (key == ENTER)
 		init_cam(all->acam);
-	if (key == MORE)
+	if (key == W)
 		all->acam->origin.y += 5;
-	if (key == LESS)
+	if (key == S)
 		all->acam->origin.y -= 5;
 	if (key == UP)
 		all->acam->dir_y.z += 0.05;
@@ -43,13 +43,13 @@ static int	key_press(int key, t_all *all)
 		all->acam->dir_y.x -= 0.05;
 	if (key == RIGHT)
 		all->acam->dir_y.x += 0.05;
-	if (key == W)
+	if (key == MORE)
 		all->acam->origin.z += 5;
-	if (key == S)
+	if (key == LESS)
 		all->acam->origin.z -= 5;
-	if (key == A)
-		all->acam->origin.x += 5;
 	if (key == D)
+		all->acam->origin.x += 5;
+	if (key == A)
 		all->acam->origin.x -= 5;
 	if (key != DEL)
 		ray_tracing(all);

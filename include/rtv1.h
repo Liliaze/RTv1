@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:31:14 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/20 13:16:43 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/20 19:11:13 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct	s_object
 	t_v3d			origin;
 	t_v3d			dir;
 	double			size;
+	double			h;
 	int				r;
 	int				g;
 	int				b;
@@ -106,21 +107,25 @@ typedef struct	s_all
 
 void	print_object(t_obj *aobj, int *nb_object);
 void	init_cam(t_cam *acam);
+int		init_scene(t_obj *acur, t_obj *aobj, int *nb_obj, char *name_scene);
 int		ft_loop(t_all *all);
-int		init_scene(t_cam *acam, t_obj *aobj, int *nb_obj, char *name_scene);
-void	init_sphere(t_obj *sphere);
+void	ray_tracing(t_all *all);
 void	define_pixel_target(int x, int y, t_cam *acam, t_ray *aray);
 void	define_ray_dir(t_ray *aray);
-void	color_all_pixel(int color, char *data, int last_pixel);
-void	color_one_pixel_secure(int color, t_img *aimg, int x, int y);
-void	ray_tracing(t_all *all);
 void	smash_up(t_all *all);
 int		smash_plan(t_obj *plan, t_ray *aray);
 int		smash_sphere(t_obj *sphere, t_ray *aray);
+int		smash_cylindre(t_obj *cyl, t_ray *aray);
+int		smash_cone(t_obj *cyl, t_ray *aray);
+void	color_all_pixel(int color, char *data, int last_pixel);
+void	color_one_pixel_secure(int color, t_img *aimg, int x, int y);
 void	vector_normalize(t_v3d *v);
 t_v3d	*vector_sub(t_v3d *a, t_v3d *b);
+t_v3d	*vector_sub2d(t_v3d *a, t_v3d *b);
+t_v3d	*set_to(t_v3d *a, t_v3d *b);
 void	vector_mult(t_v3d *a, t_v3d *b);
 void	vector_translate(t_v3d *a, t_v3d b, double coef);
 double	vector_dot(t_v3d *a, t_v3d *b);
+double	vector_dot2d(t_v3d *a, t_v3d *b);
 t_v3d	*vector_copy(t_v3d *v);
 #endif

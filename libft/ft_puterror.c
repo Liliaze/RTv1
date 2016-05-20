@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/19 15:52:22 by dboudy            #+#    #+#             */
-/*   Updated: 2016/04/19 16:58:03 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/20 18:16:07 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void		ft_display_error(char *str)
 	ft_putstr(str);
 	ft_change_color("0m");
 	ft_putstr("'. Try again ;)");
+	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:29:58 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/20 11:45:55 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/20 19:08:05 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ int	main(int ac, char **av)
 		all = (t_all *)ft_memalloc(sizeof(t_all));
 		init_struct(all);
 		init_window_and_img(all->awin, all->aimg, av[1]);
-		init_scene(all->acam, all->aobj, &(all->nb_object), av[1]);// lire et parser les infos de la scene ici.
-//		ray_tracing(all);
+		init_cam(all->acam);
+		init_scene(all->aobj, all->acur, &(all->nb_object), av[1]);
+		//ajout menu et multi argument ?
 		ft_loop(all);
 	}
 	return (0);

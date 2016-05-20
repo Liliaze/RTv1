@@ -6,13 +6,21 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 16:08:47 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/19 16:26:41 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/20 19:07:07 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "libft.h"
 #include <math.h>
+
+t_v3d	*set_to(t_v3d *a, t_v3d *b)
+{
+	a->x = b->x;
+	a->y = b->y;
+	a->z = b->z;
+	return (a);
+}
 
 void	vector_normalize(t_v3d *v)
 {
@@ -24,6 +32,21 @@ void	vector_normalize(t_v3d *v)
 	v->z = v->z * tmp;
 }
 
+t_v3d	*vector_sub2d(t_v3d *a, t_v3d *b)
+{
+	a->x -= b->x;
+	a->y -= b->y;
+	return (a);
+}
+
+t_v3d	*vector_sub(t_v3d *a, t_v3d *b)
+{
+	a->x -= b->x;
+	a->y -= b->y;
+	a->z -= b->z;
+	return (a);
+}
+/*
 t_v3d	*vector_sub(t_v3d *a, t_v3d *b)
 {
 	t_v3d	*tmp;
@@ -34,7 +57,7 @@ t_v3d	*vector_sub(t_v3d *a, t_v3d *b)
 	tmp->z = a->z - b->z;
 	return (tmp);
 }
-
+*/
 void	vector_mult(t_v3d *a, t_v3d *b)
 {
 	a->x *= b->x;
@@ -49,12 +72,14 @@ void	vector_translate(t_v3d *a, t_v3d b, double coef)
 	a->z += b.z * coef;
 }
 
+double		vector_dot2d(t_v3d *a, t_v3d *b)
+{
+	return (a->x * b->x + a->y * b->y);
+}
+
 double		vector_dot(t_v3d *a, t_v3d *b)
 {
-	double	dot;
-
-	dot = a->x * b->x + a->y * b->y + a->z * b->z;
-	return (dot);
+	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
 	
 t_v3d		*vector_copy(t_v3d *v)
@@ -67,4 +92,3 @@ t_v3d		*vector_copy(t_v3d *v)
 	new->z = v->z;
 	return (new);
 }
-	
