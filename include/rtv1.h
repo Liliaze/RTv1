@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:31:14 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/19 18:17:38 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/20 13:16:43 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct	s_all
 }				t_all;
 
 void	print_object(t_obj *aobj, int *nb_object);
-int		test(int nb);
+void	init_cam(t_cam *acam);
 int		ft_loop(t_all *all);
 int		init_scene(t_cam *acam, t_obj *aobj, int *nb_obj, char *name_scene);
 void	init_sphere(t_obj *sphere);

@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:29:58 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/19 16:19:25 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/20 11:45:55 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int ac, char **av)
 		init_struct(all);
 		init_window_and_img(all->awin, all->aimg, av[1]);
 		init_scene(all->acam, all->aobj, &(all->nb_object), av[1]);// lire et parser les infos de la scene ici.
-		ray_tracing(all);
+//		ray_tracing(all);
 		ft_loop(all);
 	}
 	return (0);

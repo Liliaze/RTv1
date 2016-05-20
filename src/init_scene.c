@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 10:19:53 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/19 16:59:13 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/20 13:16:40 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include <fcntl.h>
 
-inline static void init_cam(t_cam *acam)
+inline void init_cam(t_cam *acam)
 {
 	acam->origin.x = 0;
 	acam->origin.y = -100;
