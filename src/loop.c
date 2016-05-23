@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 10:35:09 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/20 17:39:09 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/23 18:39:38 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ static int	key_press(int key, t_all *all)
 	if (key == A)
 		all->acam->origin.x -= 5;
 	if (key != DEL)
+	{
+		color_all_pixel(BLACK, all->aimg->image, all->aimg->last_pixel);
 		ray_tracing(all);
+	}
 	return (0);
 }
 

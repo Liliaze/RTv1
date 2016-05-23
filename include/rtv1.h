@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:31:14 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/20 19:11:13 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/23 18:40:17 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,17 @@ t_v3d	*set_to(t_v3d *a, t_v3d *b);
 void	vector_mult(t_v3d *a, t_v3d *b);
 void	vector_translate(t_v3d *a, t_v3d b, double coef);
 double	vector_dot(t_v3d *a, t_v3d *b);
-double	vector_dot2d(t_v3d *a, t_v3d *b);
+double	vector_dotxz_subycoef(t_v3d *a, t_v3d *b, double ecart);
+double	vector_dot2dxz(t_v3d *a, t_v3d *b);
+double  to_rad(double r);
+double	saturate(double n);
+t_v3d	*saturate_vec(t_v3d *n);
+double	length_vec(t_v3d *z);
+t_v3d  *add(t_v3d *v1, t_v3d *v2);
 t_v3d	*vector_copy(t_v3d *v);
+t_v3d  *clamp_vec(t_v3d *v1, double min, double max);
+double  clamp(double n, double min2, double max2);
+t_v3d  *turn_orthogonal(t_v3d *v1);
+t_v3d  *cross_product(t_v3d *v1, t_v3d *v2);
+t_v3d  *scalar_multiply(t_v3d *a, double amount);
 #endif
