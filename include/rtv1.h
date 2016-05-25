@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:31:14 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/23 18:40:17 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/25 15:30:02 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdlib.h>
 
 //# define MAX_DIST	200000
-# define WINW		800
-# define WINH		600
+# define WINW		1080
+# define WINH		800
 # define COEFW		(double)WINW / ((double)WINW * 100)
 # define COEFH		(double)WINH / ((double)WINH * 100)
 //# define FOV		30
@@ -126,6 +126,7 @@ t_v3d	*set_to(t_v3d *a, t_v3d *b);
 void	vector_mult(t_v3d *a, t_v3d *b);
 void	vector_translate(t_v3d *a, t_v3d b, double coef);
 double	vector_dot(t_v3d *a, t_v3d *b);
+double	vector_dot_cone(t_v3d *a, t_v3d *b);
 double	vector_dotxz_subycoef(t_v3d *a, t_v3d *b, double ecart);
 double	vector_dot2dxz(t_v3d *a, t_v3d *b);
 double  to_rad(double r);

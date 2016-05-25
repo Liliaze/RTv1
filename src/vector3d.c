@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 16:08:47 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/23 18:40:15 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/25 16:58:28 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,11 @@ double		vector_dot2dxz(t_v3d *a, t_v3d *b)
 double		vector_dotxz_subycoef(t_v3d *a, t_v3d *b, double ecart)
 {
 	return (a->x * b->x + a->z * b->z - a->y * b->y * ecart);
+}
+
+double		vector_dot_cone(t_v3d *a, t_v3d *b)
+{
+	return (a->x * b->x - a->y * b->y + a->z * b->z);
 }
 
 double		vector_dot(t_v3d *a, t_v3d *b)

@@ -6,11 +6,11 @@
 #    By: dboudy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/19 11:43:50 by dboudy            #+#    #+#              #
-#    Updated: 2016/05/23 15:09:01 by dboudy           ###   ########.fr        #
+#    Updated: 2016/05/25 14:05:59 by dboudy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = rtv2
+NAME = rtv1
 NAMEH = rtv1
 GCC = gcc
 INCLIB = -I libft/includes
