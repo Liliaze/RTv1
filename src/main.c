@@ -6,13 +6,29 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:29:58 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/20 19:08:05 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/27 17:57:22 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "libft.h"
 #include "mlx.h"
+
+void init_cam(t_cam *acam)
+{
+	acam->pos.x = 0;
+	acam->pos.y = -100;
+	acam->pos.z = 0;
+	acam->dir_x.x = 1;
+	acam->dir_x.y = 0;
+	acam->dir_x.z = 0;
+	acam->dir_y.x = 0;
+	acam->dir_y.y = 1;
+	acam->dir_y.z = 0;
+	acam->dir_z.x = 0;
+	acam->dir_z.y = 0;
+	acam->dir_z.z = 1;
+}
 
 inline static void	init_window_and_img(t_win *win, t_img *img, char *title)
 {
@@ -24,7 +40,7 @@ inline static void	init_window_and_img(t_win *win, t_img *img, char *title)
 	if ((win->mlx = mlx_init()) == NULL)
 		ft_display_error("mlx_init() does not function");
 	if ((win->win = mlx_new_window(win->mlx, win->width, win->height,
-				win->title)) == NULL)
+					win->title)) == NULL)
 		ft_display_error("mlx_new_window() does not function");
 	if (!(img->id = mlx_new_image(win->mlx, img->width, img->height)))
 		ft_display_error("mlx_new_image() does not function");
@@ -42,8 +58,12 @@ inline static void	init_struct(t_all *all)
 	all->aimg = (t_img *)ft_memalloc(sizeof(t_img));
 	all->acam = (t_cam *)ft_memalloc(sizeof(t_cam));
 	all->aray = (t_ray *)ft_memalloc(sizeof(t_ray));
-	all->aobj = (t_obj *)ft_memalloc(sizeof(t_obj));
 	all->acur = (t_obj *)ft_memalloc(sizeof(t_obj));
+	all->aobj = (t_obj *)ft_memalloc(sizeof(t_obj));
+	all->aobj->type = ft_strdup("first");
+	all->aspot = (t_spot *)ft_memalloc(sizeof(t_spot));
+	all->aspot->type = ft_strdup("first");
+	all->ai = (t_v3d *)ft_memalloc(sizeof(t_v3d));
 }
 
 int	main(int ac, char **av)
@@ -58,7 +78,8 @@ int	main(int ac, char **av)
 		init_struct(all);
 		init_window_and_img(all->awin, all->aimg, av[1]);
 		init_cam(all->acam);
-		init_scene(all->aobj, all->acur, &(all->nb_object), av[1]);
+		read_scene(all->aobj, all->aspot, all->acur, av[1]);
+		ft_putstr("\ninit ok -------------------\n");//init_spot_lst(all->aobj, all->aspot);
 		//ajout menu et multi argument ?
 		ft_loop(all);
 	}

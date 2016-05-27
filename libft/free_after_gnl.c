@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   free_after_gnl.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/19 15:52:22 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/27 14:21:39 by dboudy           ###   ########.fr       */
+/*   Created: 2016/05/27 14:34:20 by dboudy            #+#    #+#             */
+/*   Updated: 2016/05/27 14:34:50 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_change_color(char *str)
+void	free_line_and_values(char *line, char **values)
 {
-	ft_putstr("\033[");
-	ft_putstr(str);
-}
+	int	i;
 
-void		ft_display_error(char *str)
-{
-	ft_putstr("\033[H\033[2J");
-	ft_putstr("An error is encounter : '");
-	ft_change_color("1;33m");
-	ft_putstr(str);
-	ft_change_color("0m");
-	ft_putstr("'. Try again ;)");
-	exit(1);
+	i = 0;
+	while (values[i])
+	{
+		free(values[i]);
+		i++;
+	}
+	free(values);
+	free(line);
 }

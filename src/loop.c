@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 10:35:09 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/23 18:39:38 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/05/27 15:51:03 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static int	key_press(int key, t_all *all)
 	if (key == ENTER)
 		init_cam(all->acam);
 	if (key == W)
-		all->acam->origin.y += 5;
+		all->acam->pos.y += 5;
 	if (key == S)
-		all->acam->origin.y -= 5;
+		all->acam->pos.y -= 5;
 	if (key == UP)
 		all->acam->dir_y.z += 0.05;
 	if (key == DOWN)
@@ -44,13 +44,13 @@ static int	key_press(int key, t_all *all)
 	if (key == RIGHT)
 		all->acam->dir_y.x += 0.05;
 	if (key == MORE)
-		all->acam->origin.z += 5;
+		all->acam->pos.z += 5;
 	if (key == LESS)
-		all->acam->origin.z -= 5;
+		all->acam->pos.z -= 5;
 	if (key == D)
-		all->acam->origin.x += 5;
+		all->acam->pos.x += 5;
 	if (key == A)
-		all->acam->origin.x -= 5;
+		all->acam->pos.x -= 5;
 	if (key != DEL)
 	{
 		color_all_pixel(BLACK, all->aimg->image, all->aimg->last_pixel);
