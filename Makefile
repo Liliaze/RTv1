@@ -6,7 +6,7 @@
 #    By: dboudy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/19 11:43:50 by dboudy            #+#    #+#              #
-#    Updated: 2016/05/27 14:57:53 by dboudy           ###   ########.fr        #
+#    Updated: 2016/06/01 11:31:45 by dboudy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = rtv1
 NAMEH = rtv1
 GCC = gcc
 INCLIB = -I libft/includes
-CFLAGS = -O3 -Wall -Wextra -Werror
+CFLAGS = -Weverything -O3 -Wall -Wextra -Werror
 FLAGS2 = -lm -lmlx -framework OPENGL -framework AppKit
 HEADERDIR = ./include/
 HEADERNAME = $(NAMEH).h color_key_mask.h
@@ -23,6 +23,7 @@ SRCNAME = main.c \
 		  read_scene.c \
 		  raytracer.c \
 		  smash_up.c \
+		  norm_obj.c \
 		  vector3d.c \
 		  loop.c \
 		  tools.c

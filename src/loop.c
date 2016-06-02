@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 10:35:09 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/27 15:51:03 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/02 14:17:13 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	refresh_screen(t_all *all)
 
 static int	key_press(int key, t_all *all)
 {
-	if (key == ECHAP)
+	if (key == ECHAP || key == Q)
 		exit(0);
 	if (key == DEL)
 		color_all_pixel(BLACK, all->aimg->image, all->aimg->last_pixel);
@@ -36,21 +36,21 @@ static int	key_press(int key, t_all *all)
 	if (key == S)
 		all->acam->pos.y -= 5;
 	if (key == UP)
-		all->acam->dir_y.z += 0.05;
+		all->acam->dir_y.z += 0.08;
 	if (key == DOWN)
-		all->acam->dir_y.z -= 0.05;
+		all->acam->dir_y.z -= 0.08;
 	if (key == LEFT)
-		all->acam->dir_y.x -= 0.05;
+		all->acam->dir_y.x -= 0.08;
 	if (key == RIGHT)
-		all->acam->dir_y.x += 0.05;
+		all->acam->dir_y.x += 0.08;
 	if (key == MORE)
-		all->acam->pos.z += 5;
+		all->acam->pos.z += 8;
 	if (key == LESS)
-		all->acam->pos.z -= 5;
+		all->acam->pos.z -= 8;
 	if (key == D)
-		all->acam->pos.x += 5;
+		all->acam->pos.x += 8;
 	if (key == A)
-		all->acam->pos.x -= 5;
+		all->acam->pos.x -= 8;
 	if (key != DEL)
 	{
 		color_all_pixel(BLACK, all->aimg->image, all->aimg->last_pixel);

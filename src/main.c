@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:29:58 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/27 17:57:22 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/01 11:19:35 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	main(int ac, char **av)
 		init_window_and_img(all->awin, all->aimg, av[1]);
 		init_cam(all->acam);
 		read_scene(all->aobj, all->aspot, all->acur, av[1]);
-		ft_putstr("\ninit ok -------------------\n");//init_spot_lst(all->aobj, all->aspot);
 		//ajout menu et multi argument ?
 		ft_loop(all);
 	}
