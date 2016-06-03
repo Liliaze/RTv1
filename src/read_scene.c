@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 10:19:53 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/01 15:59:29 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/03 17:32:12 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	print_spot(t_spot *tmp)
 		printf("dir.x = %f|\n", aobj->dir.x);
 		printf("dir.y = %f|\n", aobj->dir.y);
 		printf("dir.z = %f|\n", aobj->dir.z);
-		printf("i = %f|\n", aobj->i);
+//		printf("i = %f|\n", aobj->i);
 		printf("rgb = [%d-%d-%d]\n", aobj->r, aobj->g, aobj->b);
 		printf("color def = %d|\n", aobj->color);
 		aobj = aobj->next;
@@ -114,7 +114,7 @@ static void	*add_obj_or_spot(t_spot *aspot, t_obj *aobj, char **val, int t)
 	t ? (aobj->dir.x = ft_atod(val[4])) : (aspot->dir.x = ft_atod(val[4]));
 	t ? (aobj->dir.y = ft_atod(val[5])) : (aspot->dir.y = ft_atod(val[5]));
 	t ? (aobj->dir.z = ft_atod(val[6])) : (aspot->dir.z = ft_atod(val[6]));
-	t ? (aobj->size = ft_atod(val[7])) : (aspot->i = 0);
+	t ? (aobj->size = ft_atod(val[7])) :/* (aspot->i = */0/*)*/;
 	t ? (aobj->r = ft_atoi(val[9])) : (aspot->r = ft_atoi(val[9]));
 	t ? (aobj->g = ft_atoi(val[10])) : (aspot->g = ft_atoi(val[10]));
 	t ? (aobj->b = ft_atoi(val[11])) : (aspot->b = ft_atoi(val[11]));
@@ -134,37 +134,52 @@ static void	*add_obj_or_spot(t_spot *aspot, t_obj *aobj, char **val, int t)
 	}
 }
 
-static int	to_create_lst(t_obj *aobj, t_spot *aspot,
-		t_obj *save_head_obj, char **val)
+static int	to_create_lst(t_obj *aobj, t_spot *aspot, char **val)
 {
 	t_spot	*save_head_spot;
+	t_obj	*save_head_obj;
 
 	save_head_spot = aspot;
 	save_head_obj = aobj;
+		ft_putstr("u");
 	if (!(ft_strcmp(val[0], "spot")))
 	{
+		ft_putstr("\n first ?");
 		if (ft_strcmp(save_head_spot->type, "first"))
 		{
+		ft_putstr("\nfirst = oui");
 			while (save_head_spot->next != NULL)
 				save_head_spot = save_head_spot->next;
+		ft_putstr("\nfin chaine");
 			save_head_spot->next = (t_spot *)ft_memalloc(sizeof(t_spot)); 
+		ft_putstr("\nfin malloc next");
 			save_head_spot = save_head_spot->next;
+		ft_putstr("\nin if first");
 		}
+		ft_putstr("\nafter if");
 		save_head_spot = add_obj_or_spot(save_head_spot, save_head_obj, val, 0);
 		return (1);
 	}
+		ft_putstr("r");
+		ft_putstr("\n first obj?");
 	if (ft_strcmp(save_head_obj->type, "first"))
 	{
+		ft_putstr("\nfirst = oui");
 		while (save_head_obj->next != NULL)
 			save_head_obj = save_head_obj->next;
+		ft_putstr("\nfin chaine");
 		save_head_obj->next = (t_obj *)ft_memalloc(sizeof(t_obj)); 
+		ft_putstr("\nfin malloc next");
 		save_head_obj = save_head_obj->next;
+		ft_putstr("\nin if first");
 	}
+		ft_putstr("v");
 	save_head_obj = add_obj_or_spot(save_head_spot, save_head_obj, val, 1);
+		ft_putstr("o");
 	return (1);
 }
 
-int			read_scene(t_obj *aobj, t_spot *aspot, t_obj *acur, char *scene)
+int			read_scene(t_obj *aobj, t_spot *aspot, char *scene)
 {
 	int		ret;
 	int		fd;
@@ -177,9 +192,12 @@ int			read_scene(t_obj *aobj, t_spot *aspot, t_obj *acur, char *scene)
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		val = ft_strsplit(line, '\t');
+		ft_putstr("a");
 		if (val[0][0] != '/' && val != NULL && nb_values(val))
-			to_create_lst(aobj, aspot, acur, val);
+			to_create_lst(aobj, aspot, val);
+		ft_putstr("i");
 		free_line_and_values(line, val);
+		ft_putstr("r");
 	}
 	if (!(ft_strcmp(aobj->type, "first")) || ret == -1)
 		ft_display_error("Bad ARGV or Not object in your map."); // si multi argu a ecrire sur la fenetre et ne pas lancer le raytracing !!!!
@@ -191,5 +209,6 @@ int			read_scene(t_obj *aobj, t_spot *aspot, t_obj *acur, char *scene)
 	print_object(aobj); //a retirer a la fin
 	print_spot(aspot); //a retirer a la fin
 	close(fd);
+	ft_putstr("\nfinish read\n");
 	return (1);
 }

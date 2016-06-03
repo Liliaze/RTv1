@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 13:16:48 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/02 15:50:36 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/03 10:21:11 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,15 @@ static int	check_spot(t_ray *r, t_v3d *ai, t_spot *s, t_obj *o, int c)
 	while (tmp_s)
 	{
 		set_to(&v, &tmp_s->pos);
-		//aray->dir.x = v->x - ai.x;
-	//	aray->dir.y = v->y - ai.y;
-	//	aray->dir.z = v->z - ai.z;
-		set_to(&r->dir, (vector_sub(&v, &r->pos)));
+		set_to(&r->dir,  (vector_sub(&v, &r->pos)));
 		vector_normalize(&r->dir);
 		tmp_o = o;
 		smash = 0;
 		while (tmp_o && !smash)
 		{
 			dist_s = vector_dist(*ai, tmp_s->pos);
-			if ((smash = tmp_o->smash(tmp_o, r)) && (r->t - 0.111111 < dist_s) && (r->t - 0.111111 > 0))
+			if ((smash = tmp_o->smash(tmp_o, r))
+					&& (r->t - 0.001 < dist_s) && (r->t - 0.001 > 0))
 				c_def = (int)(c * 0.5);
 			tmp_o = tmp_o->next;
 		}
@@ -69,20 +67,22 @@ static int	check_spot(t_ray *r, t_v3d *ai, t_spot *s, t_obj *o, int c)
 
 static void	smash_up(t_all *all)
 {
-	all->acur = all->aobj;
+	t_obj	*acur;
+
+	acur = all->aobj;
 	all->aray->check_spot = 0;
-	while (all->acur)
+	while (acur)
 	{
-		if ((all->acur->smash(all->acur, all->aray)))
+		if ((acur->smash(acur, all->aray)))
 			if ((!(all->dist > -1.00000000) && !(all->dist < -1.00000000)
 						&& all->aray->t > 0) || (0 < all->aray->t
 							&& all->aray->t < all->dist))
 			{
 				all->dist = all->aray->t;
-				all->color = all->acur->color;
+				all->color = acur->color;
 				set_to(all->ai, &all->aray->i);
 			}
-		all->acur = all->acur->next;
+		acur = acur->next;
 	}
 }
 

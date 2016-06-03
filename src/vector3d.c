@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 16:08:47 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/02 13:43:50 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/03 10:20:17 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
    return (clamp_vec(n, 0.0, 1.0));
    }
    */
-double	length_vec(t_v3d *z)
+/*double	length_vec(t_v3d *z)
 {
 	return (sqrt(z->x * z->x + z->y * z->y + z->z * z->z));
 }
-
+*/
 void	printv(t_v3d v)
 {
 	printf("x-%f, y-%f, z-%f\n", v.x, v.y, v.z);

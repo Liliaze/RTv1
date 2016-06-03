@@ -6,7 +6,7 @@
 #    By: dboudy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/19 11:43:50 by dboudy            #+#    #+#              #
-#    Updated: 2016/06/01 11:31:45 by dboudy           ###   ########.fr        #
+#    Updated: 2016/06/03 16:38:59 by dboudy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ HEADERDIR = ./include/
 HEADERNAME = $(NAMEH).h color_key_mask.h
 SRCDIR = ./src/
 SRCNAME = main.c \
+		  menu.c \
+		  free_lst.c \
 		  read_scene.c \
 		  raytracer.c \
 		  smash_up.c \

@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:31:14 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/02 15:05:01 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/03 17:32:10 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,23 @@
 # include <stdio.h> // A SUP AVANT RENDU DEBUG
 # include <stdlib.h>
 
-//# define MAX_DIST	200000
+# define MLX		awin->mlx
+# define WIN		awin->win
+# define MAP		awin->av
 # define WINW		800
 # define WINH		640
 # define COEFW		(double)WINW / ((double)WINW * 100)
 # define COEFH		(double)WINH / ((double)WINH * 100)
-//# define FOV		30
 
 typedef struct	s_windows
 {
-	void		*mlx;
-	void		*win;
-	char		*title;
+	int			padding;
 	int			width;
 	int			height;
+	int			ac;
+	char		**av;
+	void		*mlx;
+	void		*win;
 }				t_win;
 
 typedef struct	s_image
@@ -58,15 +61,14 @@ typedef struct	s_camera
 	t_v3d		dir_x;
 	t_v3d		dir_y;
 	t_v3d		dir_z;
-	//double		dist_focale;
 }				t_cam;
 
 typedef struct	s_rayon
 {
-	t_v3d		pos; // origine 
-	t_v3d		dir; // direction
-	double		t; //distance : inconnue a trouver
+	t_v3d		pos;
+	t_v3d		dir;
 	t_v3d		i;
+	double		t;
 	int			padding;
 	int			check_spot;
 }				t_ray;
@@ -81,7 +83,7 @@ typedef struct	s_spot
 	int			g;
 	int			b;
 	int			color;
-	double		i;
+	//double		i;
 	struct 	s_spot	*next;
 }				t_spot;
 
@@ -104,7 +106,8 @@ typedef struct	s_object
 typedef struct	s_all
 {
 	int			color;
-	int			padding;
+	short		in_menu;
+	short		hook;
 	double		dist;
 	t_v3d		*ai;
 	t_win		*awin;
@@ -112,18 +115,17 @@ typedef struct	s_all
 	t_cam		*acam;
 	t_ray		*aray;
 	t_obj		*aobj;
-	t_obj		*acur;
 	t_spot		*aspot;
 }				t_all;
 
+void	go_menu(t_all *all, int key);
+void	free_scene(t_obj *aobj, t_spot *aspot);
 void	init_cam(t_cam *acam);
-int		read_scene(t_obj *obj, t_spot *spot, t_obj *tmp, char *name);
-//void	init_spot_lst(t_obj *aobj, t_obj *aspot);
+int		read_scene(t_obj *obj, t_spot *spot, char *name);
 int		ft_loop(t_all *all);
 void	ray_tracing(t_all *all);
 void	define_pixel_target(int x, int y, t_cam *acam, t_ray *aray);
 void	define_ray_dir(t_ray *aray);
-//int		color_phong(t_all *all);//void	smash_up(t_all *all);
 int		norm_plan(t_obj *plan, t_ray *aray);
 int		norm_sphere(t_obj *sphere, t_ray *aray);
 int		norm_cyl(t_obj *cyl, t_ray *aray);
@@ -140,22 +142,7 @@ void	vector_normalize(t_v3d *v);
 double	vector_dist(t_v3d a, t_v3d b);
 t_v3d	*vector_sub(t_v3d *a, t_v3d *b);
 t_v3d	*vector_subtmp(t_v3d *a, t_v3d *b);
-//t_v3d	*vector_sub2d(t_v3d *a, t_v3d *b);
 t_v3d	*set_to(t_v3d *a, t_v3d *b);
-//void	vector_mult(t_v3d *a, t_v3d *b);
 double	vector_dot(t_v3d *a, t_v3d *b);
-//double	vector_dot_cone(t_v3d *a, t_v3d *b);
-//double	vector_dotxz_subycoef(t_v3d *a, t_v3d *b, double ecart);
-//double	vector_dot2dxz(t_v3d *a, t_v3d *b);
-//double  to_rad(double r);
-//double	saturate(double n);
-//t_v3d	*saturate_vec(t_v3d *n);
-double	length_vec(t_v3d *z);
-//t_v3d  *add(t_v3d *v1, t_v3d *v2);
-//t_v3d	*vector_copy(t_v3d *v);
-//t_v3d  *clamp_vec(t_v3d *v1, double min, double max);
-//double  clamp(double n, double min2, double max2);
-//t_v3d  *turn_orthogonal(t_v3d *v1);
-//t_v3d  *cross_product(t_v3d *v1, t_v3d *v2);
 t_v3d  *scalar_multiply(t_v3d *a, double amount);
 #endif

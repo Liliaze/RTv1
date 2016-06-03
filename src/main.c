@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:29:58 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/01 11:19:35 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/03 15:30:20 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ void init_cam(t_cam *acam)
 	acam->dir_z.z = 1;
 }
 
-inline static void	init_window_and_img(t_win *win, t_img *img, char *title)
+inline static void	init_window_and_img(t_win *win, t_img *img)
 {
-	win->title = ft_strdup(title);
 	win->width = WINW;
 	win->height = WINH;
 	img->width = WINW;
@@ -40,7 +39,7 @@ inline static void	init_window_and_img(t_win *win, t_img *img, char *title)
 	if ((win->mlx = mlx_init()) == NULL)
 		ft_display_error("mlx_init() does not function");
 	if ((win->win = mlx_new_window(win->mlx, win->width, win->height,
-					win->title)) == NULL)
+					"RAYTRACER BY DBOUDY - V1")) == NULL)
 		ft_display_error("mlx_new_window() does not function");
 	if (!(img->id = mlx_new_image(win->mlx, img->width, img->height)))
 		ft_display_error("mlx_new_image() does not function");
@@ -58,7 +57,6 @@ inline static void	init_struct(t_all *all)
 	all->aimg = (t_img *)ft_memalloc(sizeof(t_img));
 	all->acam = (t_cam *)ft_memalloc(sizeof(t_cam));
 	all->aray = (t_ray *)ft_memalloc(sizeof(t_ray));
-	all->acur = (t_obj *)ft_memalloc(sizeof(t_obj));
 	all->aobj = (t_obj *)ft_memalloc(sizeof(t_obj));
 	all->aobj->type = ft_strdup("first");
 	all->aspot = (t_spot *)ft_memalloc(sizeof(t_spot));
@@ -70,16 +68,17 @@ int	main(int ac, char **av)
 {
 	t_all	*all;
 
-	if (ac != 2)
-		ft_display_error("Please join a scene");
+	if (ac < 2 || ac > 5)
+		ft_display_error("Please join between 1 to 4 scene");
 	else
 	{
 		all = (t_all *)ft_memalloc(sizeof(t_all));
 		init_struct(all);
-		init_window_and_img(all->awin, all->aimg, av[1]);
-		init_cam(all->acam);
-		read_scene(all->aobj, all->aspot, all->acur, av[1]);
-		//ajout menu et multi argument ?
+		all->awin->av = av;
+		all->awin->ac = ac;
+		all->in_menu = 0;
+		init_window_and_img(all->awin, all->aimg);
+		go_menu(all, 36);
 		ft_loop(all);
 	}
 	return (0);
