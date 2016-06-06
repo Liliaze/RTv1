@@ -6,7 +6,7 @@
 #    By: dboudy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/24 10:53:12 by dboudy            #+#    #+#              #
-#    Updated: 2016/05/27 14:36:30 by dboudy           ###   ########.fr        #
+#    Updated: 2016/06/06 16:14:25 by dboudy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRCS = ft_itoa.c ft_putchar_fd.c ft_strcmp.c \
 	   ft_lstadd.c ft_lstiter.c ft_lstmap.c \
 	   ft_trace_i.c ft_trace_str.c ft_trace_c.c \
 	   get_next_line.c ft_puterror.c ft_atod.c \
-	   free_after_gnl.c
+	   free_after_gnl.c ft_tablen.c ft_rgb.c
 
 OBJNAME = $(SRCS:.c=.o)
 OBJS = $(addprefix $(OBJDIR), $(OBJNAME))
@@ -66,6 +66,6 @@ clean:
 fclean: clean
 	rm -rf $(NAME) 
 
-mrproper: all clean
+proper: all clean
 
 re: fclean all

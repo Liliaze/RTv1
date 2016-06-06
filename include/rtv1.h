@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:31:14 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/03 17:32:10 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/06 17:24:44 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,13 @@ typedef struct	s_object
 
 typedef struct	s_all
 {
-	int			color;
+	char		*scene;
 	short		in_menu;
 	short		hook;
+	short		nb_spot;
+	short		nb_obj;
+	int			color;
+	int			padding;
 	double		dist;
 	t_v3d		*ai;
 	t_win		*awin;
@@ -119,9 +123,9 @@ typedef struct	s_all
 }				t_all;
 
 void	go_menu(t_all *all, int key);
-void	free_scene(t_obj *aobj, t_spot *aspot);
+void	free_scene(t_obj *aobj, t_spot *aspot, int nb_obj, int nb_spot);
 void	init_cam(t_cam *acam);
-int		read_scene(t_obj *obj, t_spot *spot, char *name);
+int		read_scene(t_all *all);
 int		ft_loop(t_all *all);
 void	ray_tracing(t_all *all);
 void	define_pixel_target(int x, int y, t_cam *acam, t_ray *aray);

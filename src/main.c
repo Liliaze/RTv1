@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:29:58 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/03 15:30:20 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/06 17:25:26 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,16 @@ inline static void	init_struct(t_all *all)
 	all->aspot = (t_spot *)ft_memalloc(sizeof(t_spot));
 	all->aspot->type = ft_strdup("first");
 	all->ai = (t_v3d *)ft_memalloc(sizeof(t_v3d));
+	all->scene = ft_strdup("scene_menu.txt");
+
 }
 
 int	main(int ac, char **av)
 {
 	t_all	*all;
 
-	if (ac < 2 || ac > 5)
-		ft_display_error("Please join between 1 to 4 scene");
+	if (ac < 2 || ac > 6)
+		ft_display_error("Please join between 1 to 5 scene");
 	else
 	{
 		all = (t_all *)ft_memalloc(sizeof(t_all));

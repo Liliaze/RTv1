@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_after_gnl.c                                   :+:      :+:    :+:   */
+/*   ft_rgb.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/27 14:34:20 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/06 17:37:32 by dboudy           ###   ########.fr       */
+/*   Created: 2016/06/06 16:09:04 by dboudy            #+#    #+#             */
+/*   Updated: 2016/06/06 16:14:50 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	free_line_and_values(char *line, char **values)
+int		ft_rgb(int r, int g, int b)
 {
-	int	i;
-
-	i = 0;
-	while (values[i])
-	{
-		free(values[i]);
-		i++;
-	}
-	free(values);
-	free(line);
+	return ((r << 16) + (g << 8) + b);
 }

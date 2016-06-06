@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 18:32:30 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/27 14:36:10 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/06 16:14:08 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *s1, const char *s2);
 char				*ft_strnstr(const char *s1, const char *s2, size_t n);
 
+int					ft_tablen(char	**tab);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, int n);
 double				ft_atod(const char *str);
@@ -93,6 +94,7 @@ void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
 
+int					ft_rgb(int r, int g, int b);
 void				ft_color(char *str);
 void				ft_trace_i(unsigned int i, int nb);
 void				ft_trace_str(char *color, char *str);

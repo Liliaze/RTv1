@@ -6,13 +6,15 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 10:19:53 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/03 17:32:12 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/06 17:36:54 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "libft.h"
 #include <fcntl.h>
+#include "mlx.h"
+#include "color_key_mask.h"
 
 static void	print_spot(t_spot *tmp)
 {
@@ -31,9 +33,8 @@ static void	print_spot(t_spot *tmp)
 		printf("dir.x = %f|\n", aobj->dir.x);
 		printf("dir.y = %f|\n", aobj->dir.y);
 		printf("dir.z = %f|\n", aobj->dir.z);
-//		printf("i = %f|\n", aobj->i);
+		//		printf("i = %f|\n", aobj->i);
 		printf("rgb = [%d-%d-%d]\n", aobj->r, aobj->g, aobj->b);
-		printf("color def = %d|\n", aobj->color);
 		aobj = aobj->next;
 	}
 	printf ("TOTAL DE %d SPOTS REGISTER\n", i);
@@ -58,25 +59,9 @@ static void	print_object(t_obj *tmp)
 		printf("size = %f|\n", aobj->size);
 		printf("hauteur = %f|\n", aobj->h);
 		printf("rgb = [%d-%d-%d]\n", aobj->r, aobj->g, aobj->b);
-		printf("color def = %d|\n", aobj->color);
 		aobj = aobj->next;
 	}
 	printf ("TOTAL DE %d OBJECTS REGISTER\n", i);
-}
-
-static	int		nb_values(char	**val)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 12;
-	while (val[i])
-		i++;
-	if (i == j)
-		return (1);
-	ft_display_error("A data is missing in map.");
-	return (0);
 }
 
 static	void	add_pnt_fnt(t_obj *aobj, char *type)
@@ -105,81 +90,78 @@ static	void	add_pnt_fnt(t_obj *aobj, char *type)
 		ft_display_error("A requested form in your map does not exist.");
 }
 
-static void	*add_obj_or_spot(t_spot *aspot, t_obj *aobj, char **val, int t)
+static void	*add_obj(t_obj *aobj, short *nb, char **val)
 {
-	t ? (aobj->type = ft_strdup(val[0])) : (aspot->type = ft_strdup(val[0]));
-	t ? (aobj->pos.x = ft_atod(val[1])) : (aspot->pos.x = ft_atod(val[1]));
-	t ? (aobj->pos.y = ft_atod(val[2])) : (aspot->pos.y = ft_atod(val[2]));
-	t ? (aobj->pos.z = ft_atod(val[3])) : (aspot->pos.z = ft_atod(val[3]));
-	t ? (aobj->dir.x = ft_atod(val[4])) : (aspot->dir.x = ft_atod(val[4]));
-	t ? (aobj->dir.y = ft_atod(val[5])) : (aspot->dir.y = ft_atod(val[5]));
-	t ? (aobj->dir.z = ft_atod(val[6])) : (aspot->dir.z = ft_atod(val[6]));
-	t ? (aobj->size = ft_atod(val[7])) :/* (aspot->i = */0/*)*/;
-	t ? (aobj->r = ft_atoi(val[9])) : (aspot->r = ft_atoi(val[9]));
-	t ? (aobj->g = ft_atoi(val[10])) : (aspot->g = ft_atoi(val[10]));
-	t ? (aobj->b = ft_atoi(val[11])) : (aspot->b = ft_atoi(val[11]));
-	t ? (aobj->color = (aobj->r << 16) + (aobj->g << 8) + aobj->b) :
-		(aspot->color = (aspot->r << 16) + (aspot->g << 8) + aspot->b);
-	if (t)
-	{
-		add_pnt_fnt(aobj, aobj->type);
-		aobj->h = ft_atod(val[8]);
-		aobj->next = NULL;
-		return (aobj);
-	}
-	else
-	{
-		aspot->next = NULL;
-		return (aspot);
-	}
+	(*nb)++;
+	aobj->type = ft_strdup(val[0]);
+	aobj->pos.x = ft_atod(val[1]);
+	aobj->pos.y = ft_atod(val[2]);
+	aobj->pos.z = ft_atod(val[3]);
+	aobj->dir.x = ft_atod(val[4]);
+	aobj->dir.y = ft_atod(val[5]);
+	aobj->dir.z = ft_atod(val[6]);
+	aobj->size = ft_atod(val[7]);
+	aobj->r = ft_atoi(val[9]);
+	aobj->g = ft_atoi(val[10]);
+	aobj->b = ft_atoi(val[11]);
+	add_pnt_fnt(aobj, aobj->type);
+	aobj->h = ft_atod(val[8]);
+	aobj->next = NULL;
+	return (aobj);
 }
 
-static int	to_create_lst(t_obj *aobj, t_spot *aspot, char **val)
+static void	*add_spot(t_spot *aspot, short *nb, char **val)
+{
+	(*nb)++;
+	aspot->type = ft_strdup(val[0]);
+	aspot->pos.x = ft_atod(val[1]);
+	aspot->pos.y = ft_atod(val[2]);
+	aspot->pos.z = ft_atod(val[3]);
+	aspot->dir.x = ft_atod(val[4]);
+	aspot->dir.y = ft_atod(val[5]);
+	aspot->dir.z = ft_atod(val[6]);
+	aspot->r = ft_atoi(val[9]);
+	aspot->g = ft_atoi(val[10]);
+	aspot->b = ft_atoi(val[11]);
+	aspot->next = NULL;
+	return (aspot);
+}
+
+static int	to_create_lst(t_all *all, char **val)
 {
 	t_spot	*save_head_spot;
 	t_obj	*save_head_obj;
 
-	save_head_spot = aspot;
-	save_head_obj = aobj;
-		ft_putstr("u");
+	save_head_spot = all->aspot;
+	save_head_obj = all->aobj;
 	if (!(ft_strcmp(val[0], "spot")))
 	{
-		ft_putstr("\n first ?");
 		if (ft_strcmp(save_head_spot->type, "first"))
 		{
-		ft_putstr("\nfirst = oui");
 			while (save_head_spot->next != NULL)
 				save_head_spot = save_head_spot->next;
-		ft_putstr("\nfin chaine");
 			save_head_spot->next = (t_spot *)ft_memalloc(sizeof(t_spot)); 
-		ft_putstr("\nfin malloc next");
 			save_head_spot = save_head_spot->next;
-		ft_putstr("\nin if first");
 		}
-		ft_putstr("\nafter if");
-		save_head_spot = add_obj_or_spot(save_head_spot, save_head_obj, val, 0);
+		else
+		free(save_head_spot->type);
+		save_head_spot = add_spot(save_head_spot, &all->nb_spot, val);
 		return (1);
 	}
-		ft_putstr("r");
-		ft_putstr("\n first obj?");
 	if (ft_strcmp(save_head_obj->type, "first"))
 	{
-		ft_putstr("\nfirst = oui");
 		while (save_head_obj->next != NULL)
 			save_head_obj = save_head_obj->next;
-		ft_putstr("\nfin chaine");
 		save_head_obj->next = (t_obj *)ft_memalloc(sizeof(t_obj)); 
-		ft_putstr("\nfin malloc next");
 		save_head_obj = save_head_obj->next;
-		ft_putstr("\nin if first");
 	}
-		ft_putstr("v");
-	save_head_obj = add_obj_or_spot(save_head_spot, save_head_obj, val, 1);
-		ft_putstr("o");
+	else
+	free(save_head_obj->type);
+	save_head_obj = add_obj(save_head_obj, &all->nb_obj, val);
 	return (1);
 }
 
-int			read_scene(t_obj *aobj, t_spot *aspot, char *scene)
+int			read_scene(t_all *all)
 {
 	int		ret;
 	int		fd;
@@ -187,28 +169,29 @@ int			read_scene(t_obj *aobj, t_spot *aspot, char *scene)
 	char	**val;
 
 	ret = 1;
-	if ((fd = open(scene, O_RDONLY)) == -1)
+	all->nb_obj = 0; //tmp !
+	all->nb_spot = 0;
+	if ((fd = open(all->scene, O_RDONLY)) == -1)
 		ft_display_error("Please join a correct map file");
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		val = ft_strsplit(line, '\t');
-		ft_putstr("a");
-		if (val[0][0] != '/' && val != NULL && nb_values(val))
-			to_create_lst(aobj, aspot, val);
-		ft_putstr("i");
+		if (val[0][0] != '/')
+		{
+			if (ft_tablen(val) == 12)
+				to_create_lst(all, val);
+			else
+				ft_display_error("A data is missing in map.");
+		}
 		free_line_and_values(line, val);
-		ft_putstr("r");
 	}
-	if (!(ft_strcmp(aobj->type, "first")) || ret == -1)
-		ft_display_error("Bad ARGV or Not object in your map."); // si multi argu a ecrire sur la fenetre et ne pas lancer le raytracing !!!!
-	if (!(ft_strcmp(aspot->type, "first")))
-	{
-		free(aspot->type);
-		ft_memdel((void**)&(aspot));
-	}
-	print_object(aobj); //a retirer a la fin
-	print_spot(aspot); //a retirer a la fin
+	if (!(ft_strcmp(all->aobj->type, "first")) || ret == -1)
+		mlx_string_put(all->MLX, all->WIN, (WINW - 480) / 2, WINH / 2,
+				RED, "Bad ARGV or Not object in your map. Press ENTER");
+	if (all->nb_obj)
+		print_object(all->aobj); // warning
+	if (all->nb_spot)
+		print_spot(all->aspot); //warning
 	close(fd);
-	ft_putstr("\nfinish read\n");
 	return (1);
 }

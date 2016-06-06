@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 13:16:48 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/03 10:21:11 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/06 17:25:14 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	smash_up(t_all *all)
 							&& all->aray->t < all->dist))
 			{
 				all->dist = all->aray->t;
-				all->color = acur->color;
+				all->color = (int)(ft_rgb(acur->r, acur->g, acur->b) * 0.2);
 				set_to(all->ai, &all->aray->i);
 			}
 		acur = acur->next;
@@ -91,6 +91,8 @@ void	ray_tracing(t_all	*all)
 	int		xy[2];
 	t_v3d	target;
 
+	if (all->nb_obj == 0)
+		return;
 	define_target(all->acam, &target);
 	xy[1] = -1;
 	while (++xy[1] < WINH)
@@ -103,7 +105,8 @@ void	ray_tracing(t_all	*all)
 			smash_up(all);
 			if (all->dist > -1.00000000 || all->dist < -1.00000000)
 			{
-				all->color = check_spot(all->aray, all->ai, all->aspot,
+				if (all->nb_spot != 0)
+					all->color = check_spot(all->aray, all->ai, all->aspot,
 						all->aobj, all->color); 
 				color_one_pixel_secure(all->color, all->aimg, xy[0], xy[1]);
 			}

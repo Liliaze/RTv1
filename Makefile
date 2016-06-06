@@ -6,7 +6,7 @@
 #    By: dboudy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/19 11:43:50 by dboudy            #+#    #+#              #
-#    Updated: 2016/06/03 16:38:59 by dboudy           ###   ########.fr        #
+#    Updated: 2016/06/06 14:50:02 by dboudy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,9 +37,10 @@ SRC = $(addprefix $(SRCDIR), $(SRCNAME))
 HEADER = $(addprefix $(HEADERDIR), $(HEADERNAME))
 OBJ = $(addprefix $(OBJDIR), $(OBJNAME))
 
-all: libft $(NAME)
+all: $(NAME)
 
-$(NAME): libft/libft.a $(OBJ) $(HEADER)
+$(NAME): $(OBJ) $(HEADER)
+	make -C libft
 	$(GCC) $(CFLAGS) $(FLAGS2) $(OBJ) -o $(NAME) $(INCLIB) -L libft -lft
 
 $(OBJ): | $(OBJDIR)
@@ -54,8 +55,7 @@ $(OBJDIR):
 
 .PHONY: clean fclean proper re libft
 
-libft:
-	make -C libft
+$(LIBFT):
 
 clean:
 	@make clean -C libft

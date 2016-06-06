@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_after_gnl.c                                   :+:      :+:    :+:   */
+/*   ft_nb_values.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/27 14:34:20 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/06 17:37:32 by dboudy           ###   ########.fr       */
+/*   Created: 2016/06/06 14:38:15 by dboudy            #+#    #+#             */
+/*   Updated: 2016/06/06 14:52:57 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	free_line_and_values(char *line, char **values)
+int	ft_tablen(char	**val)
 {
 	int	i;
 
 	i = 0;
-	while (values[i])
-	{
-		free(values[i]);
+	if (!val || !val[i])
+		return (0);
+	while (val[i])
 		i++;
-	}
-	free(values);
-	free(line);
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 10:35:09 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/03 14:20:22 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/06 15:16:30 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int	refresh_screen(t_all *all)
 		if (all->hook == 1)
 		{
 			all->hook = 0;
+			color_all_pixel(BLACK, all->aimg->image, all->aimg->last_pixel);
 			ray_tracing(all);
 		}
 		mlx_clear_window(all->MLX, all->WIN);
@@ -55,7 +56,7 @@ static int	key_press(int key, t_all *all)
 		all->acam->pos.x += 8;
 	else if (key == A && (all->hook = 1))
 		all->acam->pos.x -= 8;
-	else if (key == ENTER || (key >= ONE && key <= FOUR))
+	else if (key == ENTER || all->in_menu == 1)
 		go_menu(all, key);
 	return (0);
 }
