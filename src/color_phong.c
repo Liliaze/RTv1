@@ -3,7 +3,6 @@
 /*                                                        :::      ::::::::   */
 /*   color_phong.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edelangh <edelangh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 18:31:58 by edelangh          #+#    #+#             */
 /*   Updated: 2015/03/22 14:23:55 by edelangh         ###   ########.fr       */

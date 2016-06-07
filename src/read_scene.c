@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 10:19:53 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/06 17:36:54 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/07 12:08:30 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	print_spot(t_spot *tmp)
 		printf("dir.y = %f|\n", aobj->dir.y);
 		printf("dir.z = %f|\n", aobj->dir.z);
 		//		printf("i = %f|\n", aobj->i);
-		printf("rgb = [%d-%d-%d]\n", aobj->r, aobj->g, aobj->b);
+		printf("rgb = [%d-%d-%d]\n", aobj->c.r, aobj->c.g, aobj->c.b);
 		aobj = aobj->next;
 	}
 	printf ("TOTAL DE %d SPOTS REGISTER\n", i);
@@ -58,7 +58,7 @@ static void	print_object(t_obj *tmp)
 		printf("dir.z = %f|\n", aobj->dir.z);
 		printf("size = %f|\n", aobj->size);
 		printf("hauteur = %f|\n", aobj->h);
-		printf("rgb = [%d-%d-%d]\n", aobj->r, aobj->g, aobj->b);
+		printf("rgb = [%d-%d-%d]\n", aobj->c.r, aobj->c.g, aobj->c.b);
 		aobj = aobj->next;
 	}
 	printf ("TOTAL DE %d OBJECTS REGISTER\n", i);
@@ -101,9 +101,9 @@ static void	*add_obj(t_obj *aobj, short *nb, char **val)
 	aobj->dir.y = ft_atod(val[5]);
 	aobj->dir.z = ft_atod(val[6]);
 	aobj->size = ft_atod(val[7]);
-	aobj->r = ft_atoi(val[9]);
-	aobj->g = ft_atoi(val[10]);
-	aobj->b = ft_atoi(val[11]);
+	aobj->c.r = ft_atoi(val[9]);
+	aobj->c.g = ft_atoi(val[10]);
+	aobj->c.b = ft_atoi(val[11]);
 	add_pnt_fnt(aobj, aobj->type);
 	aobj->h = ft_atod(val[8]);
 	aobj->next = NULL;
@@ -120,9 +120,9 @@ static void	*add_spot(t_spot *aspot, short *nb, char **val)
 	aspot->dir.x = ft_atod(val[4]);
 	aspot->dir.y = ft_atod(val[5]);
 	aspot->dir.z = ft_atod(val[6]);
-	aspot->r = ft_atoi(val[9]);
-	aspot->g = ft_atoi(val[10]);
-	aspot->b = ft_atoi(val[11]);
+	aspot->c.r = ft_atoi(val[9]);
+	aspot->c.g = ft_atoi(val[10]);
+	aspot->c.b = ft_atoi(val[11]);
 	aspot->next = NULL;
 	return (aspot);
 }

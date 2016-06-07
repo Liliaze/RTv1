@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 13:33:26 by dboudy            #+#    #+#             */
-/*   Updated: 2016/05/27 15:52:12 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/07 11:49:53 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	color_all_pixel(int	color, char *data, int last_pixel)
 	}
 }
 
-void	color_one_pixel_secure(int color, t_img *img, int x, int y)
+void	color_one_px_sec(int color, t_img *img, int x, int y)
 {
 	int *tmp;
 	int pixel;

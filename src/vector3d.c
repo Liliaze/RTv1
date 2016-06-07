@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 16:08:47 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/03 10:20:17 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/07 18:20:05 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,15 @@ void	vector_translate(t_v3d *a, t_v3d b, double coef)
 	a->y += b.y * coef;
 	a->z += b.z * coef;
 }
-/*
-   t_v3d	*add(t_v3d *v1, t_v3d *v2)
+
+   t_v3d	*vector_add(t_v3d *v1, t_v3d *v2)
    {
    v1->x += v2->x;
    v1->y += v2->y;
    v1->z += v2->z;
    return (v1);
    }
-
+/*
    double		vector_dot2dxz(t_v3d *a, t_v3d *b)
    {
    return (a->x * b->x + a->z * b->z);
