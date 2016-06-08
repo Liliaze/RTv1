@@ -6,14 +6,12 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 10:27:46 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/06 17:59:17 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/08 17:05:59 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include "libft.h"
 #include "mlx.h"
-#include "color_key_mask.h"
 
 static void	draw_name_map(t_win *awin)
 {
@@ -60,11 +58,11 @@ void		go_menu(t_all *all, int key)
 	if (key == ENTER && !all->in_menu)
 	{
 		if (ft_strcmp(all->aobj->type, "first"))
-			free_scene(all->aobj, all->aspot, all->nb_obj, all->nb_spot);
+			free_scene(all->aobj, all->aspot, all->nb_o, all->nb_s);
 		free(all->scene);
 		all->in_menu = 1;
 		init_cam(all->acam);
-		all->scene = ft_strdup("scene_menu.txt");
+		all->scene = ft_strdup("map/menu.txt");
 		read_scene(all);
 		ray_tracing(all);
 		mlx_clear_window(all->MLX, all->WIN);
@@ -77,7 +75,7 @@ void		go_menu(t_all *all, int key)
 		if (key - 82 < all->awin->ac && key -82 >= 1)
 		{
 			free(all->scene);
-			free_scene(all->aobj, all->aspot, all->nb_obj, all->nb_spot);
+			free_scene(all->aobj, all->aspot, all->nb_o, all->nb_s);
 			all->scene = ft_strdup(all->MAP[key - 82]);
 			init_cam(all->acam);
 			read_scene(all);

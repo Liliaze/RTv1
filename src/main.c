@@ -6,19 +6,18 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:29:58 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/07 17:47:59 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/08 17:03:49 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include "libft.h"
 #include "mlx.h"
 
 void init_cam(t_cam *acam)
 {
 	acam->pos.x = 0;
-	acam->pos.y = -100;
-	acam->pos.z = 0;
+	acam->pos.y = -110;
+	acam->pos.z = 2;
 	acam->dir_x.x = 1;
 	acam->dir_x.y = 0;
 	acam->dir_x.z = 0;
@@ -54,9 +53,7 @@ inline static void	init_window_and_img(t_win *win, t_img *img)
 inline static void	init_struct(t_all *all)
 {
 	all->ac = (t_rgb *)ft_memalloc(sizeof(t_rgb));
-	all->acur = (t_rgb *)ft_memalloc(sizeof(t_rgb));
 	all->ai = (t_v3d *)ft_memalloc(sizeof(t_v3d));
-	all->an = (t_v3d *)ft_memalloc(sizeof(t_v3d));
 	all->awin = (t_win *)ft_memalloc(sizeof(t_win));
 	all->aimg = (t_img *)ft_memalloc(sizeof(t_img));
 	all->acam = (t_cam *)ft_memalloc(sizeof(t_cam));
@@ -65,7 +62,7 @@ inline static void	init_struct(t_all *all)
 	all->aspot = (t_spot *)ft_memalloc(sizeof(t_spot));
 	all->aobj->type = ft_strdup("first");
 	all->aspot->type = ft_strdup("first");
-	all->scene = ft_strdup("scene_menu.txt");
+	all->scene = ft_strdup("map/menu.txt");
 	all->in_menu = 0;
 }
 

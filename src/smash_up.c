@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 11:32:02 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/07 15:34:57 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/08 16:53:02 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,6 @@ static int	delta(double res[3], double abc[3], t_ray *aray, t_v3d *objpos)
 	if (final_dist < 0.0)
 		return (0);
 	aray->t = final_dist;
-	/*
-	   res[1] = (-abc[1] + sqrt(res[0])) / (2 * abc[0]);
-	   res[2] = (-abc[1] - sqrt(res[0])) / (2 * abc[0]);
-	   if (res[1] < res[2])
-	   {
-	   aray->t = res[1];
-	   final_dist = res[1];
-	   }
-	   else
-	   {
-	   aray->t = res[2];
-	   final_dist = res[2];
-	   }*/
 	if (!(aray->check_spot))
 	{
 		aray->i.x = aray->pos.x + aray->dir.x * final_dist;

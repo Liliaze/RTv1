@@ -6,89 +6,13 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 10:19:53 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/07 12:08:30 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/08 17:06:49 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include "libft.h"
 #include <fcntl.h>
 #include "mlx.h"
-#include "color_key_mask.h"
-
-static void	print_spot(t_spot *tmp)
-{
-	t_spot	*aobj;
-	int		i;
-
-	aobj = tmp;
-	i = 0;
-	printf("\n====== SPOT ===\n");// aretirer
-	while (aobj != NULL && ++i)
-	{
-		printf("======= %s =======\n", aobj->type);
-		printf("o.x = %f|\n", aobj->pos.x);
-		printf("o.y = %f|\n", aobj->pos.y);
-		printf("o.z = %f|\n", aobj->pos.z);
-		printf("dir.x = %f|\n", aobj->dir.x);
-		printf("dir.y = %f|\n", aobj->dir.y);
-		printf("dir.z = %f|\n", aobj->dir.z);
-		//		printf("i = %f|\n", aobj->i);
-		printf("rgb = [%d-%d-%d]\n", aobj->c.r, aobj->c.g, aobj->c.b);
-		aobj = aobj->next;
-	}
-	printf ("TOTAL DE %d SPOTS REGISTER\n", i);
-}
-
-static void	print_object(t_obj *tmp)
-{
-	t_obj	*aobj;
-	int		i;
-
-	aobj = tmp;
-	i = 0;
-	while (aobj != NULL && ++i)
-	{
-		printf("======= %s =======\n", aobj->type);
-		printf("o.x = %f|\n", aobj->pos.x);
-		printf("o.y = %f|\n", aobj->pos.y);
-		printf("o.z = %f|\n", aobj->pos.z);
-		printf("dir.x = %f|\n", aobj->dir.x);
-		printf("dir.y = %f|\n", aobj->dir.y);
-		printf("dir.z = %f|\n", aobj->dir.z);
-		printf("size = %f|\n", aobj->size);
-		printf("hauteur = %f|\n", aobj->h);
-		printf("rgb = [%d-%d-%d]\n", aobj->c.r, aobj->c.g, aobj->c.b);
-		aobj = aobj->next;
-	}
-	printf ("TOTAL DE %d OBJECTS REGISTER\n", i);
-}
-
-static	void	add_pnt_fnt(t_obj *aobj, char *type)
-{
-	if (!(ft_strcmp(type, "sphere")))
-	{
-		aobj->smash = &smash_sphere;
-		aobj->norm = &norm_sphere;
-	}
-	else if (!(ft_strcmp(type, "plan")))
-	{
-		aobj->smash = &smash_plan;
-		aobj->norm = &norm_sphere;
-	}
-	else if (!(ft_strcmp(type, "cyl")))
-	{
-		aobj->smash = &smash_cyl;
-		aobj->norm = &norm_cyl;
-	}
-	else if (!(ft_strcmp(type, "cone")))
-	{
-		aobj->smash = &smash_cone;
-		aobj->norm = &norm_cone;
-	}
-	else
-		ft_display_error("A requested form in your map does not exist.");
-}
 
 static void	*add_obj(t_obj *aobj, short *nb, char **val)
 {
@@ -104,7 +28,16 @@ static void	*add_obj(t_obj *aobj, short *nb, char **val)
 	aobj->c.r = ft_atoi(val[9]);
 	aobj->c.g = ft_atoi(val[10]);
 	aobj->c.b = ft_atoi(val[11]);
-	add_pnt_fnt(aobj, aobj->type);
+	if (!(ft_strcmp(aobj->type, "sphere")))
+		aobj->smash = &smash_sphere;
+	else if (!(ft_strcmp(aobj->type, "plan")))
+		aobj->smash = &smash_plan;
+	else if (!(ft_strcmp(aobj->type, "cyl")))
+		aobj->smash = &smash_cyl;
+	else if (!(ft_strcmp(aobj->type, "cone")))
+		aobj->smash = &smash_cone;
+	else
+		ft_display_error("A requested form in your map does not exist.");
 	aobj->h = ft_atod(val[8]);
 	aobj->next = NULL;
 	return (aobj);
@@ -145,7 +78,7 @@ static int	to_create_lst(t_all *all, char **val)
 		}
 		else
 		free(save_head_spot->type);
-		save_head_spot = add_spot(save_head_spot, &all->nb_spot, val);
+		save_head_spot = add_spot(save_head_spot, &all->nb_s, val);
 		return (1);
 	}
 	if (ft_strcmp(save_head_obj->type, "first"))
@@ -157,7 +90,7 @@ static int	to_create_lst(t_all *all, char **val)
 	}
 	else
 	free(save_head_obj->type);
-	save_head_obj = add_obj(save_head_obj, &all->nb_obj, val);
+	save_head_obj = add_obj(save_head_obj, &all->nb_o, val);
 	return (1);
 }
 
@@ -169,8 +102,8 @@ int			read_scene(t_all *all)
 	char	**val;
 
 	ret = 1;
-	all->nb_obj = 0; //tmp !
-	all->nb_spot = 0;
+	all->nb_s = 0;
+	all->nb_o = 0;
 	if ((fd = open(all->scene, O_RDONLY)) == -1)
 		ft_display_error("Please join a correct map file");
 	while ((ret = get_next_line(fd, &line)) == 1)
@@ -186,12 +119,7 @@ int			read_scene(t_all *all)
 		free_line_and_values(line, val);
 	}
 	if (!(ft_strcmp(all->aobj->type, "first")) || ret == -1)
-		mlx_string_put(all->MLX, all->WIN, (WINW - 480) / 2, WINH / 2,
-				RED, "Bad ARGV or Not object in your map. Press ENTER");
-	if (all->nb_obj)
-		print_object(all->aobj); // warning
-	if (all->nb_spot)
-		print_spot(all->aspot); //warning
+		ft_display_error("Bad ARGV or Not object in your map. Press ENTER");
 	close(fd);
 	return (1);
 }
