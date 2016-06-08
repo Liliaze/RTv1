@@ -6,7 +6,7 @@
 #    By: dboudy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/19 11:43:50 by dboudy            #+#    #+#              #
-#    Updated: 2016/06/06 14:50:02 by dboudy           ###   ########.fr        #
+#    Updated: 2016/06/08 16:21:33 by dboudy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,9 @@ SRCNAME = main.c \
 		  read_scene.c \
 		  raytracer.c \
 		  smash_up.c \
-		  norm_obj.c \
+		  check_spot.c \
 		  vector3d.c \
+		  to_color.c \
 		  loop.c \
 		  tools.c
 

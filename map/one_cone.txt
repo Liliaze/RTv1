@@ -1,0 +1,4 @@
+//type	pos_x	pos_y	pos_z	dir_x	dir_y	dir_z	size	h	R		G		B//
+cone	0		-40		0		0		0		1		0.3		0.1	255		0		125
+spot	-5		-80		80		1		1		1		2		2	255		255		255
+/end

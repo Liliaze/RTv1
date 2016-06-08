@@ -1,0 +1,5 @@
+//type	pos_x	pos_y	pos_z	dir_x	dir_y	dir_z	size	h	R		G		B//
+cyl		0		0		0		0		0		1		3		6	175		155		75
+/plan	0		0		-2		0		0		1		/		/	125		125		200
+spot	-5		-20		10		1		1		1		2		2	255		255		255
+/end

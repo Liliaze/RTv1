@@ -1,0 +1,11 @@
+//type	pos_x	pos_y	pos_z	dir_x	dir_y	dir_z	size	h	R		G		B//
+sphere	-3		-40		-11		/		/		/		8		/	225		225		20
+sphere	3		-43		-10		/		/		/		5		/	20		225		225
+sphere	5		-46		-8		/		/		/		2		/	0		0		0
+sphere	5		-41		-7		/		/		/		2		/	0		0		0
+sphere	-5		-42		-5		/		/		/		2		/	250		0		0
+sphere	-8.4	-42		-8.5	/		/		/		2		/	250		0		0
+sphere	-3		-46		-7		/		/		/		2		/	250		0		0
+spot	5		5		20		1		1		1		2		2	255		255		255
+spot	-5		5		20		1		0.2		0.2		2		2	255		255		255
+//end
