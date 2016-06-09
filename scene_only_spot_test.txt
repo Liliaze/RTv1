@@ -1,5 +1,0 @@
-//type	pos_x	pos_y	pos_z	dir_x	dir_y	dir_z	size	h	R		G		B//
-spot	12		-10		5		-1		0		1		0.3		0.1	255		125		50
-spot	0		-40		0		0		0		1		0.3		0.1	255		0		125
-spot	20		0		0		1		0		0		/		/	125		125		125
-//end
