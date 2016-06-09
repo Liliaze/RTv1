@@ -6,13 +6,12 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 10:35:09 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/06 15:16:30 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/09 13:03:18 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "mlx.h"
-#include "color_key_mask.h"
 
 static int	refresh_screen(t_all *all)
 {
@@ -30,16 +29,29 @@ static int	refresh_screen(t_all *all)
 	return (0);
 }
 
-static int	key_press(int key, t_all *all)
+static void	move(int key, t_all *all)
 {
-	if (key == ECHAP || key == Q)
-		exit(0);
-	else if (key == DEL)
-		color_all_pixel(BLACK, all->aimg->image, all->aimg->last_pixel);
-	else if (key == W && (all->hook = 1))
+	all->hook = 1;
+	if (key == W && (all->hook = 1))
 		all->acam->pos.y += 5;
 	else if (key == S && (all->hook = 1))
 		all->acam->pos.y -= 5;
+	else if (key == A && (all->hook = 1))
+		all->acam->pos.x -= 8;
+	else if (key == D && (all->hook = 1))
+		all->acam->pos.x += 8;
+}
+
+static int	key_press(int key, t_all *all)
+{
+	if (key == ECHAP)
+		exit(0);
+	else if (key == W || key == S || key == A || key == D)
+		move(key, all);
+	else if (key == MORE && (all->hook = 1))
+		all->acam->pos.z += 8;
+	else if (key == LESS && (all->hook = 1))
+		all->acam->pos.z -= 8;
 	else if (key == UP && (all->hook = 1))
 		all->acam->dir_y.z += 0.08;
 	else if (key == DOWN && (all->hook = 1))
@@ -48,16 +60,10 @@ static int	key_press(int key, t_all *all)
 		all->acam->dir_y.x -= 0.08;
 	else if (key == RIGHT && (all->hook = 1))
 		all->acam->dir_y.x += 0.08;
-	else if (key == MORE && (all->hook = 1))
-		all->acam->pos.z += 8;
-	else if (key == LESS && (all->hook = 1))
-		all->acam->pos.z -= 8;
-	else if (key == D && (all->hook = 1))
-		all->acam->pos.x += 8;
-	else if (key == A && (all->hook = 1))
-		all->acam->pos.x -= 8;
 	else if (key == ENTER || all->in_menu == 1)
 		go_menu(all, key);
+	else if (key == DEL)
+		color_all_pixel(BLACK, all->aimg->image, all->aimg->last_pixel);
 	return (0);
 }
 

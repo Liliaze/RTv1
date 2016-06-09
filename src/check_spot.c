@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 13:16:48 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/08 18:33:22 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:23:13 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,15 @@ static int	check_hit(t_all *all, t_spot *s, int color)
 	}
 	if (!smash)
 	{
-		color = add_int_rgb(color, rgb_to_int_coef(all->ac, 0.05 / all->nb_s));
-		color = add_int_rgb(color, rgb_to_int_coef(&s->c, 0.05 / all->nb_s));
+		color = add_int_rgb(color, rgb_to_int_coef(all->ac, 0.32 / all->nb_s));
 		color = add_int_rgb(color, rgb_to_int_coef(&s->c,
-					(1 / (t * 0.001)) * (0.01 / all->nb_s)));
-		color = add_int_rgb(color, rgb_to_int_coef(all->ac,
-					(1 / (t * 0.001)) * (0.01 / all->nb_s)));
-		//color = add_int_rgb(color, rgb_to_int_coef(&s->c, 0.05 / all->nb_s));
-		//color = add_int_rgb(color, rgb_to_int_coef(all->ac,
-	//				(1 / (t * 0.01)) * (0.002 / all->nb_s)));
+					(1 / (t * 0.001)) * (0.013 / all->nb_s)));
 	}
 	color = add_int_rgb(color, rgb_to_int_coef(all->ac, 0.1 / all->nb_s));
-	//color = add_int_rgb(color, rgb_to_int_coef(&s->c, 0.075 / all->nb_s));
 	return (color);
 }
 
-int			check_spot(t_all *all, int color) 
+int			check_spot(t_all *all, int color)
 {
 	t_spot	*tmp_s;
 	t_v3d	v;

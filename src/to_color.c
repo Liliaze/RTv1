@@ -6,13 +6,13 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 11:03:20 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/08 17:58:28 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:11:36 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int	rgb_to_int_coef(t_rgb *s1, double coef)
+int		rgb_to_int_coef(t_rgb *s1, double coef)
 {
 	int		rgb[3];
 
@@ -39,10 +39,10 @@ t_rgb	*rgb_coef(t_rgb *src, double coef)
 	return (src);
 }
 
-int		add_int_rgb(int	c, int c2)
+int		add_int_rgb(int c, int c2)
 {
 	int		rgb[6];
-	
+
 	rgb[0] = (int)(c >> 16 & 0xFF);
 	rgb[1] = (int)(c >> 8 & 0xFF);
 	rgb[2] = (int)(c >> 0 & 0xFF);

@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 10:27:46 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/08 17:05:59 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:07:23 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 
 static void	draw_name_map(t_win *awin)
 {
-	int	i;
-	char *stri;
-	char *tmp1;
-	char *tmp2;
+	int		i;
+	char	*stri;
+	char	*tmp1;
+	char	*tmp2;
 
 	i = 1;
-
 	while (i < awin->ac)
 	{
 		stri = ft_itoa(i);
@@ -52,9 +51,25 @@ static void	draw_str_menu(t_win *awin)
 			GREY, "ECHAP or Q to quit");
 }
 
+static void	else_menu(t_all *all, int key)
+{
+	if (key - 82 < all->awin->ac && key - 82 >= 1)
+	{
+		free(all->scene);
+		free_scene(all->aobj, all->aspot, all->nb_o, all->nb_s);
+		all->scene = ft_strdup(all->MAP[key - 82]);
+		init_cam(all->acam);
+		read_scene(all);
+		all->in_menu = 0;
+		all->hook = 1;
+	}
+	else
+		mlx_string_put(all->MLX, all->WIN, (WINW - 420) / 2,
+				95, YELLOW, "Enter a number in the list of map - Try Again");
+}
+
 void		go_menu(t_all *all, int key)
 {
-	
 	if (key == ENTER && !all->in_menu)
 	{
 		if (ft_strcmp(all->aobj->type, "first"))
@@ -71,20 +86,5 @@ void		go_menu(t_all *all, int key)
 		draw_name_map(all->awin);
 	}
 	else if (key != ENTER && all->in_menu)
-	{
-		if (key - 82 < all->awin->ac && key -82 >= 1)
-		{
-			free(all->scene);
-			free_scene(all->aobj, all->aspot, all->nb_o, all->nb_s);
-			all->scene = ft_strdup(all->MAP[key - 82]);
-			init_cam(all->acam);
-			read_scene(all);
-			all->in_menu = 0;
-			all->hook = 1;
-		}
-		else
-			mlx_string_put(all->MLX, all->WIN, (WINW - 420) / 2,
-				95, YELLOW, "Enter a number in the list of map - Try Again");
-	}
+		else_menu(all, key);
 }
-

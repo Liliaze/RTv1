@@ -6,7 +6,7 @@
 #    By: dboudy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/19 11:43:50 by dboudy            #+#    #+#              #
-#    Updated: 2016/06/08 16:21:33 by dboudy           ###   ########.fr        #
+#    Updated: 2016/06/09 11:35:53 by dboudy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCNAME = main.c \
 		  smash_up.c \
 		  check_spot.c \
 		  vector3d.c \
+		  vector3d_2.c \
 		  to_color.c \
 		  loop.c \
 		  tools.c

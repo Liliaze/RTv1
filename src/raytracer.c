@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/26 13:16:48 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/08 16:52:28 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:09:48 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	define_rayon(t_v3d *target, t_ray *aray, t_cam *acam)
 	aray->t = -1;
 }
 
-static void	smash_up(t_all *all)
+static int	smash_up(t_all *all)
 {
 	t_obj	*acur;
 
@@ -40,8 +40,8 @@ static void	smash_up(t_all *all)
 	{
 		if ((acur->smash(acur, all->aray)))
 			if ((!(all->dist > -1.00000000) && !(all->dist < -1.00000000)
-				&& all->aray->t > 0) || (0 < all->aray->t
-					&& all->aray->t < all->dist))
+						&& all->aray->t > 0) || (0 < all->aray->t
+							&& all->aray->t < all->dist))
 			{
 				all->dist = all->aray->t;
 				set_to(all->ai, &all->aray->i);
@@ -49,16 +49,17 @@ static void	smash_up(t_all *all)
 			}
 		acur = acur->next;
 	}
+	return (1);
 }
 
-void		ray_tracing(t_all	*all)
+void		ray_tracing(t_all *all)
 {
 	int		xy[2];
 	int		color;
 	t_v3d	target;
 
 	if (!(color = 0) && all->nb_o == 0)
-		return;
+		return ;
 	define_target(all->acam, &target);
 	xy[1] = -1;
 	while (++xy[1] < WINH)
@@ -68,10 +69,9 @@ void		ray_tracing(t_all	*all)
 		{
 			all->dist = -1.00000000;
 			define_rayon(&target, all->aray, all->acam);
-			smash_up(all);
-			if (all->dist > -1.00000000)
+			if (smash_up(all) && all->dist > -1.00000000)
 			{
-				color = check_spot(all, color); 
+				color = check_spot(all, color);
 				color_one_px_sec(color, all->aimg, xy[0], xy[1]);
 			}
 			vector_translate(&target, all->acam->dir_x, COEFW);

@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 11:32:02 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/08 16:53:02 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/09 10:33:07 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ static int	delta(double res[3], double abc[3], t_ray *aray, t_v3d *objpos)
 	return (1);
 }
 
-int		smash_plan(t_obj *plan, t_ray *aray)
+int			smash_plan(t_obj *plan, t_ray *aray)
 {
 	t_v3d	v;
 	t_v3d	w;
-	double tmp;
+	double	tmp;
 
 	set_to(&v, &(aray->pos));
 	set_to(&w, &(plan->dir));
@@ -64,7 +64,7 @@ int		smash_plan(t_obj *plan, t_ray *aray)
 	return (1);
 }
 
-int		smash_sphere(t_obj *sphere, t_ray *aray)
+int			smash_sphere(t_obj *sphere, t_ray *aray)
 {
 	double	abc[3];
 	double	res[3];
@@ -81,10 +81,10 @@ int		smash_sphere(t_obj *sphere, t_ray *aray)
 	return (0);
 }
 
-int		smash_cone(t_obj *cone, t_ray *aray)
+int			smash_cone(t_obj *cone, t_ray *aray)
 {
-	t_v3d	v;
-	t_v3d	y;
+	t_v3d		v;
+	t_v3d		y;
 	double		abc[3];
 	double		res[3];
 
@@ -104,7 +104,7 @@ int		smash_cone(t_obj *cone, t_ray *aray)
 	return (0);
 }
 
-int		smash_cyl(t_obj *cyl, t_ray *aray)
+int			smash_cyl(t_obj *cyl, t_ray *aray)
 {
 	t_v3d		v;
 	double		tmp[4];

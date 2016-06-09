@@ -6,7 +6,7 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 10:03:28 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/03 16:59:24 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:40:17 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ double		ft_atod(const char *str)
 	if (!str)
 		return (0);
 	while (str[i] != '.' && str[i] != '\0')
-				++i;
+		++i;
 	if (i && str[i])
 	{
 		if (result >= 0 && str[0] != '-')

@@ -6,14 +6,14 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 18:29:58 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/08 17:03:49 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:23:49 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "mlx.h"
 
-void init_cam(t_cam *acam)
+void				init_cam(t_cam *acam)
 {
 	acam->pos.x = 0;
 	acam->pos.y = -110;
@@ -66,7 +66,7 @@ inline static void	init_struct(t_all *all)
 	all->in_menu = 0;
 }
 
-int	main(int ac, char **av)
+int					main(int ac, char **av)
 {
 	t_all	*all;
 

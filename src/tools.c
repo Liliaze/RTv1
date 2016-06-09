@@ -6,13 +6,13 @@
 /*   By: dboudy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 13:33:26 by dboudy            #+#    #+#             */
-/*   Updated: 2016/06/08 16:11:37 by dboudy           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:39:02 by dboudy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	color_all_pixel(int	color, char *data, int last_pixel)
+void	color_all_pixel(int color, char *data, int last_pixel)
 {
 	int	*tmp;
 	int i;
